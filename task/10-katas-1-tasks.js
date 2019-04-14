@@ -59,7 +59,6 @@ function createCompassPoints() {
         { abbreviation : 'NWbN',  azimuth : 326.25 },
         { abbreviation : 'NNW',   azimuth : 337.50 },
         { abbreviation : 'NbW',   azimuth : 348.75 }
-
     ]
 }
 
