@@ -403,7 +403,7 @@ function timespanToHumanString(startDate, endDate) {
     throw new Error('Not implemented');
     let end = new Date(endDate);
     let start = new Date(startDate);
-    let secondsDiff = (end.getTime() - start.getTime()) / 1000;
+    let secondsDiff = (end.getTime() - start.getTime() - 1) / 1000;
     let result = '';
     console.log(secondsDiff);
     switch (true) {
