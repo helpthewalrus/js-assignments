@@ -289,7 +289,15 @@ function reverseInteger(num) {
  *   4916123456789012 => false
  */
 function isCreditCardNumber(ccn) {
-    throw new Error('Not implemented');
+    const splitCcn = ccn.toString().split('');
+  
+    if (splitCcn.length % 2 === 0) {
+      let summed = splitCcn.map((elem, ind) => ind % 2 === 0 ? +elem * 2 > 9 ? +elem * 2 - 9 : +elem * 2 : +elem);
+      return summed.reduce((a,b) => a + b) % 10 === 0;
+    } else {
+      let summed = splitCcn.map((elem, ind) => ind % 2 !== 0 ? +elem * 2 > 9 ? +elem * 2 - 9 : +elem * 2 : +elem);
+      return summed.reduce((a,b) => a + b) % 10 === 0;
+    }  
 }
 
 
@@ -393,7 +401,36 @@ function isBracketsBalanced(str) {
  */
 function timespanToHumanString(startDate, endDate) {
     throw new Error('Not implemented');
-}
+    let end = new Date(endDate);
+    let start = new Date(startDate);
+    let secondsDiff = (end.getTime() - start.getTime()) / 1000;
+    let result = '';
+    console.log(secondsDiff);
+    switch (true) {
+      case (secondsDiff <= 45):
+        return 'a few seconds ago';
+      case (secondsDiff > 45 && secondsDiff <= 90):
+        return 'a minute ago';
+      case (secondsDiff > 90 && secondsDiff / 60 <= 45):
+        return `${Math.floor(secondsDiff / 60) < 2 ? 2 : Math.floor(secondsDiff / 60)} minutes ago`;
+      case (secondsDiff / 60 > 45 && secondsDiff / 60 <= 90):
+        return 'an hour ago';
+      case (secondsDiff / 60 > 90 && secondsDiff / 3600 <= 22):
+        return `${Math.floor(secondsDiff / 3600) < 2 ? 2 : Math.ceil(secondsDiff / 3600)} hours ago`;
+      case (secondsDiff / 3600 > 22 && secondsDiff / 3600 <= 36):
+        return 'a day ago';
+      case (secondsDiff / 3600 > 36 && secondsDiff / 86400 <= 25):
+        return `${Math.ceil(secondsDiff / 86400)} days ago`;
+      case (secondsDiff / 86400 > 25 && secondsDiff / 86400 <= 45):
+        return 'a month ago';
+      case (secondsDiff / 86400 > 45 && secondsDiff / 86400 <= 345):
+        return `${Math.ceil(secondsDiff / 86400 / 30)} months ago`;
+      case (secondsDiff / 86400 > 345 && secondsDiff / 86400 <= 545):
+        return 'a year ago';
+      case (secondsDiff / 86400 > 545):
+        return `${Math.ceil(secondsDiff / 86400 / 30 / 365)} years ago`;
+    }
+  }
 
 
 /**
@@ -456,7 +493,18 @@ function getCommonDirectoryPath(pathes) {
  *
  */
 function getMatrixProduct(m1, m2) {
-    throw new Error('Not implemented');
+    const result = [];
+    for (let i = 0; i < m1.length; i++) {
+        result[i] = [];
+        for (let j = 0; j < m2[0].length; j++) {
+            let sum = 0;
+            for (let n = 0; n < m1[0].length; n++) {
+                sum += m1[i][n] * m2[n][j];
+            }
+            result[i][j] = sum;
+        }
+    }
+    return result;
 }
 
 
